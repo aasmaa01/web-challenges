@@ -16,11 +16,12 @@ datasource db {
 
 // note model
 model Note {
-  id         Int   @id @default(autoincrement())
-  title      String   @db.VarChar(255)
-  content    String   @default("Unknown")
-  authorName String   @db.VarChar(100)
+  id         Int      @id @default(autoincrement())
+  title      String   @db.VarChar(100)  
+  content    String   @db.VarChar(1000) 
+  authorName String   @default("Unknown") @db.VarChar(100) 
   isPublic   Boolean  @default(true)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
+

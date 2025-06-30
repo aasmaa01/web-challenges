@@ -64,8 +64,8 @@ export const updateNote = async (req, res, next) => {
   const { title, content, authorName, isPublic } = req.body;
 
   const updateData = {};
-  if (title !== undefined) updateData.title = title.trim();
-  if (content !== undefined) updateData.content = content.trim();
+  if (title !== undefined) updateData.title = title;
+  if (content !== undefined) updateData.content = content;
   if (authorName !== undefined) updateData.authorName = authorName;
   if (isPublic !== undefined) updateData.isPublic = isPublic;
 

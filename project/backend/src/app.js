@@ -31,7 +31,6 @@ app.use(errorHandler);
 
 // Start server
 
-// ✅ With this block (connect + start server)
 const startServer = async () => {
   try {
     await prisma.$connect();
