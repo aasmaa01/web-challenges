@@ -18,9 +18,9 @@ datasource db {
 model Note {
   id         Int   @id @default(autoincrement())
   title      String   @db.VarChar(255)
-  content    String
+  content    String   @default("Unknown")
   authorName String   @db.VarChar(100)
-  isPublic   Boolean  @default(false)
+  isPublic   Boolean  @default(true)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
