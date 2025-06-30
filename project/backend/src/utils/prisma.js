@@ -1,8 +1,7 @@
 
+import { PrismaClient } from '../generated/prisma/index.js';
 
-import { PrismaClient } from '@prisma/client'; 
-
-const globalForPrisma = global; 
+const globalForPrisma = global;
 
 const prisma =
   globalForPrisma.prisma ||
@@ -20,4 +19,4 @@ process.on('beforeExit', async () => {
   }
 });
 
-export { prisma }; 
+export { prisma };

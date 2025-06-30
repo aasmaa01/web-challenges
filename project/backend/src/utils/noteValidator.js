@@ -1,5 +1,4 @@
 
-import { prismaClient } from '../utils/prisma.js';
 import { z } from 'zod';
 
 export const noteModelValidation = z.object({

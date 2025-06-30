@@ -12,7 +12,7 @@ import {
   createNoteValidator,
   updateNoteValidator,
   validateNoteId,
-} from '../validators/noteValidator.js';
+} from '../utils/noteValidator.js';
 
 const router = express.Router();
 

@@ -1,11 +1,11 @@
-import { prismaClient } from '../utils/prisma.js';
-import { formatNote, formatNotes } from '../utils/formatNote.js';
-import { httpError } from '../middleware/errorHandler.js';
+import { prisma } from '../utils/prisma.js';
+import { formatNote, formatNotes } from '../utils/noteFormatter.js';
+import { httpError } from '../utils/errorHandler.js';
 
 // Get all notes
 export const getNotes = async (req, res, next) => {
   try {
-    const notes = await prismaClient.note.findMany();
+    const notes = await prisma.note.findMany();
     const formattedNotes = formatNotes(notes);
     return res.status(200).json(formattedNotes);
   } catch (error) {
@@ -23,7 +23,7 @@ export const createNote = async (req, res, next) => {
   } = req.body;
 
   try {
-    const createdNote = await prismaClient.note.create({
+    const createdNote = await prisma.note.create({
       data: {
         title: title.trim(),
         content: content.trim(),
@@ -41,7 +41,7 @@ export const createNote = async (req, res, next) => {
 // Get note by ID
 export const getNoteById = async (req, res, next) => {
   try {
-    const note = await prismaClient.note.findUnique({
+    const note = await prisma.note.findUnique({
       where: {
         id: Number(req.params.id),
       },
@@ -73,7 +73,7 @@ export const updateNote = async (req, res, next) => {
   }
 
   try {
-    const existingNote = await prismaClient.note.findUnique({
+    const existingNote = await prisma.note.findUnique({
       where: { id: noteId },
     });
 
@@ -81,7 +81,7 @@ export const updateNote = async (req, res, next) => {
       return next(httpError('Note not found', 404));
     }
 
-    const updatedNote = await prismaClient.note.update({
+    const updatedNote = await prisma.note.update({
       where: { id: noteId },
       data: updateData,
     });
@@ -93,11 +93,11 @@ export const updateNote = async (req, res, next) => {
 };
 
 // Delete a note
-  export const deleteNote = async (req, res, next) => {
+export const deleteNote = async (req, res, next) => {
   const noteId = Number(req.params.id);
 
   try {
-    await prismaClient.note.delete({ where: { id: noteId } });
+    await prisma.note.delete({ where: { id: noteId } });
     return res.status(204).send(); 
   } catch (error) {
     next(error);

@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import notesRouter from './routes/notes.js';
-import { errorHandler } from "./middleware/errorHandler.js";
+import { errorHandler } from "./utils/errorHandler.js";
 
 dotenv.config();
 
