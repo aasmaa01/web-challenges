@@ -355,5 +355,12 @@ Screenshots of each test are saved under `./screenshots/`
 | ❌ **Delete**          | Can delete notes                                              | ![Delete Note](./screenshots/CanDeleteNote.png)            |
 | 🌐 **CORS**           | CORS allows frontend connections                              | ![CORS](./screenshots/CORSallowsfrontendconnections.png)                  |
 | ⚠️ **Error Handling** | Proper error messages for invalid requests                    | ![Errors](./screenshots/Propererrormessagesforinvalidrequests.png)              |
+| 🔌 DB Failure      | Gracefully handles database connection errors                 |
 
+### 🔌 Handles Database Connection Errors
+
+✅ Description: If the database connection fails (e.g., due to invalid credentials or unreachable server), the app logs a clear error message and exits gracefully to avoid running in a broken state.
+
+📸 Screenshot:  
+![DB Error](./screenshots/db-connection-error.png)
 
