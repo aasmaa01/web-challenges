@@ -1,4 +1,4 @@
-# 🎯 Backend Challenge 1 — Solution Documentation: Express API & Database Foundation
+# 🏆 Backend Challenge 1 — Solution Documentation: Express API & Database Foundation
 
 This solution implements the foundational API for **CollabNote**, a collaborative note-taking app. The backend is built using **Express.js**, **Prisma ORM**, and **PostgreSQL**, with full CRUD operations and frontend‑ready JSON responses.
 
@@ -34,18 +34,18 @@ project/backend/
 
 ## ✅ Goals Achieved
 
-### 🗃️ Task 1: Database Setup with Prisma
+### 📓️ Task 1: Database Setup with Prisma
 
-- ✅ Installed Prisma & dependencies  
-- ✅ Set up `.env` with PostgreSQL `DATABASE_URL`  
-- ✅ Defined the `Note` model in `prisma/schema.prisma`  
-- ✅ Generated Prisma client and pushed schema to DB  
+- ✅ Installed Prisma & dependencies
+- ✅ Set up `.env` with PostgreSQL `DATABASE_URL`
+- ✅ Defined the `Note` model in `prisma/schema.prisma`
+- ✅ Generated Prisma client and pushed schema to DB
 
 ---
 
 ## ⚙️ Setup Breakdown
 
-### 1️⃣ PostgreSQL & Prisma
+### 1⃣ PostgreSQL & Prisma
 
 - Installed PostgreSQL via the [official installer](https://www.postgresql.org/download/)
 - Default user: `postgres`, custom password set during setup
@@ -56,14 +56,14 @@ psql -U postgres
 \du
 ```
 
-### 2️⃣ Installed Dependencies
+### 2⃣ Installed Dependencies
 
 ```bash
 npm install prisma @prisma/client cors dotenv
 npx prisma init
 ```
 
-### 3️⃣ Environment Configuration
+### 3⃣ Environment Configuration
 
 Created `.env` (based on `.env.example`):
 
@@ -71,16 +71,26 @@ Created `.env` (based on `.env.example`):
 DATABASE_URL="postgresql://postgres:yourpassword@localhost:5432/collabnote_db"
 ```
 
-### 4️⃣ Prisma Schema Definition
+### 4⃣ Prisma Schema Definition
 
 `prisma/schema.prisma`:
 
 ```prisma
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 model Note {
   id         Int      @id @default(autoincrement())
-  title      String
-  content    String
-  authorName String   @default("Unknown")
+  title      String   @db.VarChar(100)  
+  content    String   @db.VarChar(1000) 
+  authorName String   @default("Unknown") @db.VarChar(100) 
   isPublic   Boolean  @default(true)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -96,27 +106,19 @@ npx prisma db push
 
 ---
 
-### ⚙️ Task 2: Express Server Setup
-
-- ✅ Configured **CORS** to allow frontend requests from `localhost:5173`  
-- ✅ Integrated **dotenv** for environment management  
-- ✅ Set up **global error handling middleware**  
-- ✅ Configured server to run on port `5000`  
-
----
-
 ## 🔌 Express Server Setup
 
-All setup and middleware are configured inside `src/app.js`.
+All setup and middleware are configured inside `src/app.js`, and the server waits for the database to connect before starting.
 
-### ✅ `app.js` Code
+### ✅ `app.js` Code Highlights
 
 ```js
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import notesRouter from "./routes/notes.js";
+import notesRouter from './routes/notes.js';
 import { errorHandler } from "./utils/errorHandler.js";
+import { prisma } from "./utils/prisma.js";
 
 dotenv.config();
 
@@ -128,7 +130,7 @@ app.use(
   cors({
     origin: "http://localhost:5173", // Vite frontend URL
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 
@@ -142,328 +144,216 @@ app.use("/api/notes", notesRouter);
 // Global error handler
 app.use(errorHandler);
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
-});
+// Start server with DB connection handling
+const startServer = async () => {
+  try {
+    await prisma.$connect();
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running at http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error('❌ Failed to connect to the database');
+    console.error(error);
+    process.exit(1); // Stop the process if DB fails
+  }
+};
+
+startServer();
 ```
 
 ---
 
-## 📝 Task 3: API Endpoints (CRUD)
+## 🧹 Notes Controller Overview
 
-| Method | Endpoint            | Description               |
-|--------|---------------------|---------------------------|
-| GET    | `/api/notes`        | Get all notes             |
-| POST   | `/api/notes`        | Create a new note         |
-| GET    | `/api/notes/:id`    | Get a note by ID          |
-| PUT    | `/api/notes/:id`    | Update an existing note   |
-| DELETE | `/api/notes/:id`    | Delete a note by ID       |
+All logic for handling notes — including retrieving, creating, updating, and deleting — is encapsulated in `notesController.js` under the `src/Controllers/` directory.
 
----
+### Key Highlights
 
-### 🧩 Controller Code Snippets
+- 📅 `` — supports search, sort, pagination
+- 📤 `` — validates and creates a new note
+- 🔍 `` — fetches a specific note by ID
+- ✏️ `` — updates note fields selectively
+- ❌ `` — removes a note after existence check
 
-#### 📥 GET `/api/notes` — Fetch All Notes
-
-```js
-// Get all notes
-export const getNotes = async (req, res, next) => {
-  try {
-    const notes = await prisma.note.findMany();
-    const formattedNotes = formatNotes(notes);
-    return res.status(200).json(formattedNotes);
-  } catch (error) {
-    next(httpError("Failed to fetch or format notes", 500));
-  }
-};
-```
-
-#### 📤 POST `/api/notes` — Create a New Note
-
-```js
-// Create a new note
-export const createNote = async (req, res, next) => {
-  const {
-    title,
-    content,
-    authorName = "Unknown",
-    isPublic = true,
-  } = req.body;
-
-  try {
-    const createdNote = await prisma.note.create({
-      data: {
-        title: title.trim(),
-        content: content.trim(),
-        authorName,
-        isPublic,
-      },
-    });
-
-    res.status(201).json(formatNote(createdNote));
-  } catch (error) {
-    next(httpError("Note creation failed", 500));
-  }
-};
-```
-
-#### 🔍 GET `/api/notes/:id` — Get Note by ID
-
-```js
-// Get note by ID
-export const getNoteById = async (req, res, next) => {
-  try {
-    const note = await prisma.note.findUnique({
-      where: { id: Number(req.params.id) },
-    });
-
-    if (!note) {
-      return next(httpError("Note not found", 404));
-    }
-
-    res.status(200).json(formatNote(note));
-  } catch (error) {
-    next(error);
-  }
-};
-```
-
-#### ✏️ PUT `/api/notes/:id` — Update a Note
-
-```js
-// Update note
-export const updateNote = async (req, res, next) => {
-  const noteId = Number(req.params.id);
-  const { title, content, authorName, isPublic } = req.body;
-
-  const updateData = {};
-  if (title !== undefined) updateData.title = title.trim();
-  if (content !== undefined) updateData.content = content.trim();
-  if (authorName !== undefined) updateData.authorName = authorName;
-  if (isPublic !== undefined) updateData.isPublic = isPublic;
-
-  if (Object.keys(updateData).length === 0) {
-    return next(httpError("No fields provided to update", 400));
-  }
-
-  try {
-    const existingNote = await prisma.note.findUnique({
-      where: { id: noteId },
-    });
-
-    if (!existingNote) {
-      return next(httpError("Note not found", 404));
-    }
-
-    const updatedNote = await prisma.note.update({
-      where: { id: noteId },
-      data: updateData,
-    });
-
-    res.status(200).json(formatNote(updatedNote));
-  } catch (error) {
-    next(error);
-  }
-};
-```
-
-#### ❌ DELETE `/api/notes/:id` — Delete a Note
-
-```js
-// Delete a note
-export const deleteNote = async (req, res, next) => {
-  const noteId = Number(req.params.id);
-
-  try {
-    await prisma.note.delete({ where: { id: noteId } });
-    return res.status(204).send();
-  } catch (error) {
-    next(error);
-  }
-};
-```
+Each function is wrapped in `try/catch` and forwards errors to the global middleware using `next()`.
 
 ---
 
-## 🛡️ Task 4: Validation, Formatting & Middleware
+## 🧾 Note Formatting Utility
 
-### 📜 Zod Schema & Validation Middleware (`utils/noteValidator.js`)
+Located in `utils/noteFormatter.js`, this ensures that notes are returned in a frontend-friendly and consistent structure.
 
-```js
-import { z } from "zod";
+- ✅ `formatNote(note)` — Formats a single note object with standardized structure and ISO date strings.
+- ✅ `formatNotes(notes)` — Maps over an array of notes and formats each using `formatNote()`.
 
-// Note schema
-export const noteModelValidation = z.object({
-  title: z.string().min(1, "Title must exist"),
-  content: z.string().min(1, "Content must exist"),
-  authorName: z.string().optional(),
-  isPublic: z.boolean().optional(),
-});
+This keeps response formatting centralized and reusable.
 
-// Create‑note validator
-export const createNoteValidator = (req, res, next) => {
-  try {
-    req.body = noteModelValidation.parse(req.body);
-    next();
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({
-        success: false,
-        message: "Create Note validation failed",
-        errors: error.flatten().fieldErrors,
-      });
-    }
-    next(error);
-  }
-};
+---
 
-// Update‑note validator
-export const updateNoteValidator = (req, res, next) => {
-  const id = Number(req.params.id);
-  if (Number.isNaN(id) || id <= 0) {
-    return res.status(400).json({ error: "Invalid note ID" });
-  }
+## 🌐 Routes and Middleware Integration
 
-  try {
-    req.body = noteModelValidation.partial().parse(req.body);
-    next();
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({
-        success: false,
-        message: "Update Note validation failed",
-        errors: error.flatten().fieldErrors,
-      });
-    }
-    next(error);
-  }
-};
-
-// Note‑ID validator
-export const validateNoteId = (req, res, next) => {
-  const id = Number(req.params.id);
-  if (Number.isNaN(id) || id <= 0) {
-    return res.status(400).json({ error: "Invalid note ID" });
-  }
-  next();
-};
-```
-
-### 🪄 Note Formatting Utility (`utils/noteFormatter.js`)
+Defined in `src/routes/notes.js`, all routes follow REST principles and use middleware for validation:
 
 ```js
-// Format a single note
-export const formatNote = (note) => ({
-  id: note.id,
-  title: note.title,
-  content: note.content,
-  authorName: note.authorName,
-  isPublic: note.isPublic,
-  createdAt: note.createdAt,
-  updatedAt: note.updatedAt,
-});
-
-// Format an array of notes
-export const formatNotes = (notes) => notes.map(formatNote);
-```
-
-### 🛠️ Route Integration (`src/routes/notes.js`)
-
-```js
-import { Router } from "express";
+import express from 'express';
 import {
   getNotes,
-  createNote,
   getNoteById,
+  createNote,
   updateNote,
   deleteNote,
-} from "../Controllers/notesController.js";
+} from '../Controllers/notesController.js';
+
 import {
   createNoteValidator,
   updateNoteValidator,
   validateNoteId,
-} from "../utils/noteValidator.js";
+} from '../utils/noteValidator.js';
 
-const router = Router();
+const router = express.Router();
 
-router.get("/", getNotes);
-router.post("/", createNoteValidator, createNote);
-
-router.get("/:id", validateNoteId, getNoteById);
-router.put("/:id", validateNoteId, updateNoteValidator, updateNote);
-router.delete("/:id", validateNoteId, deleteNote);
+router.get('/', getNotes);
+router.get('/:id', validateNoteId, getNoteById);
+router.post('/', createNoteValidator, createNote);
+router.put('/:id', validateNoteId, updateNoteValidator, updateNote);
+router.delete('/:id', validateNoteId, deleteNote);
 
 export default router;
 ```
-## 🧪 Test Checklist
-
-### 1️⃣ Can Create Notes with Valid Data
-- ✅ **Description:** Sends a POST request with all required fields.
-- 📸 **Screenshot:**
-![Create Note Valid](./screenshots/create-note-valid.png)
 
 ---
 
-### 2️⃣ Cannot Create Notes Without Required Fields
-- ✅ **Description:** Missing `title` or `content` triggers 400 error.
-- 📸 **Screenshot:**
-![Create Note Invalid](./screenshots/create-note-invalid.png)
+## 📃 Note Validation with Zod
+
+Validation logic is handled using `Zod`, located in `utils/noteValidator.js`. It ensures clean and safe input for both creation and update operations.
+
+### 📁 Create Note Validation
+
+- Title: 3–100 characters
+- Content: 10–1000 characters
+- Author: optional, max 100 characters
+- `isPublic`: optional boolean
+
+If validation fails, a structured 400 error is returned with detailed field messages.
+
+### ✏️ Update Note Validation
+
+- Accepts **any subset** of the fields (partial update)
+- Requires **at least one** valid field to update
+- Also validates `id` via the `validateNoteId` middleware (must be a positive integer)
+
+### ⚖️ Middleware Functions
+
+- `createNoteValidator`
+- `updateNoteValidator`
+- `validateNoteId`
+
+These middleware functions are used directly in the route definitions to ensure clean request handling.
 
 ---
 
-### 3️⃣ Can Retrieve All Notes
-- ✅ **Description:** GET `/api/notes` returns all notes formatted for frontend.
-- 📸 **Screenshot:**
-![Get All Notes](./screenshots/get-all-notes.png)
+## ❗ Error Handling
+
+Error handling is centralized via a global middleware (`utils/errorHandler.js`). It supports:
+
+### 🔍 Prisma-Specific Errors
+
+- **P2002** — Unique constraint violation (e.g., duplicate title)
+- **P2025** — Record not found
+
+Returns custom responses like:
+
+```json
+{
+  "success": false,
+  "message": "Note not found",
+  "code": "P2025"
+}
+```
+
+### 🛠 Custom Application Errors
+
+Custom errors are thrown using a helper:
+
+```js
+httpError('Note not found', 404, 'NOT_FOUND')
+```
+
+And caught in the error middleware to return:
+
+```json
+{
+  "success": false,
+  "message": "Note not found",
+  "code": "NOT_FOUND"
+}
+```
+
+### ⚠️ Unknown Errors
+
+All unexpected errors are caught and return:
+
+```json
+{
+  "success": false,
+  "message": "Internal server error"
+}
+```
+
+This provides a consistent and informative error format across the entire API.
 
 ---
 
-### 4️⃣ Can Retrieve Specific Note by ID
-- ✅ **Description:** GET `/api/notes/1` returns a specific note.
-- 📸 **Screenshot:**
-![Get Note by ID](./screenshots/get-note-by-id.png)
+## 🔍 Advanced Query Features
+
+### 🔎 Search by Title or Content
+
+- You can search notes by including a `search` query param.
+- Example: `GET /api/notes?search=meeting`
+
+### 🔃 Sorting Options
+
+- You can sort notes using the `sort` query param:
+  - `newest` (default)
+  - `oldest`
+  - `title_asc`
+  - `title_desc`
+- Example: `GET /api/notes?sort=title_desc`
+
+### 📄 Pagination Support
+
+- Use `page` and `limit` query params for pagination.
+- Default: `page=1`, `limit=3`
+- Example: `GET /api/notes?page=2&limit=5`
+
+### 🔗 Combined Example
+
+```http
+GET /api/notes?search=design&sort=title_asc&page=2&limit=4
+```
+
+This will return:
+
+- Notes that match "design" in title/content
+- Sorted alphabetically by title
+- Paginated to page 2 with 4 notes per page
 
 ---
 
-### 5️⃣ Returns 404 for Non-existent Note IDs
-- ✅ **Description:** GET `/api/notes/9999` (assuming this ID doesn't exist) returns 404.
-- 📸 **Screenshot:**
-![404 Note Not Found](./screenshots/note-not-found.png)
+## ✅ Manual Test Scenarios with Screenshots
 
----
+Screenshots of each test are saved under `./screenshots/`
 
-### 6️⃣ Can Update Existing Notes
-- ✅ **Description:** PUT `/api/notes/:id` with valid changes.
-- 📸 **Screenshot:**
-![Update Note](./screenshots/update-note.png)
+| ✅ Test Case           | Description                                                   | Screenshot                                               |
+| --------------------- | ------------------------------------------------------------- | -------------------------------------------------------- |
+| 📄 **Create Note**    | Can create notes with valid data                              | ![Create Note](./screenshots/cantCreateNoteWithoutRequiredFields.png)      |
+| ❌ **Validation**      | Cannot create notes without required fields                   | ![Invalid Create](./screenshots/cantCreateNoteWithoutRequiredFields.png) |
+| 📋 **Fetch All**      | Can retrieve all notes (matching frontend sample data format) | ![All Notes](./screenshots/canGetAllNotes.png)            |
+| 🔎 **Fetch One**      | Can retrieve specific note by ID                              | ![Note by ID](./screenshots/canRetrieveDataWithId.png)          |
+| 🚫 **404 Not Found**  | Returns 404 for non-existent note IDs                         | ![404 Not Found](./screenshots/return404ForNoneExistingNote.png)       |
+| ✏️ **Update**         | Can update existing notes                                     | ![Update Note](./screenshots/updateExistingNote.png)            |
+| ❌ **Delete**          | Can delete notes                                              | ![Delete Note](./screenshots/CanDeleteNote.png)            |
+| 🌐 **CORS**           | CORS allows frontend connections                              | ![CORS](./screenshots/CORSallowsfrontendconnections.png)                  |
+| ⚠️ **Error Handling** | Proper error messages for invalid requests                    | ![Errors](./screenshots/Propererrormessagesforinvalidrequests.png)              |
 
----
 
-### 7️⃣ Can Delete Notes
-- ✅ **Description:** DELETE `/api/notes/:id` removes note from database.
-- 📸 **Screenshot:**
-![Delete Note](./screenshots/delete-note.png)
-
----
-
-### 8️⃣ CORS Allows Frontend Connections
-- ✅ **Description:** Frontend app can fetch data from backend without CORS issues.
-- 📸 **Screenshot:**
-![CORS Success](./screenshots/cors-success.png)
-
----
-
-### 9️⃣ Proper Error Messages for Invalid Requests
-- ✅ **Description:** Bad requests return informative error responses.
-- 📸 **Screenshot:**
-![Error Handling](./screenshots/error-response.png)
-
----
-
-### 🔟 Handles Database Connection Errors
-- ✅ **Description:** If DB connection fails, app responds with an error.
-- 📸 **Screenshot:**
-![DB Error](./screenshots/db-error.png)
-
----
