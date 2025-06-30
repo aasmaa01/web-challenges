@@ -1,29 +1,32 @@
+
 import { prisma } from '../utils/prisma.js';
 import { formatNote, formatNotes } from '../utils/noteFormatter.js';
 import { httpError } from '../utils/errorHandler.js';
 
-// Get all notes
+// get all notes
 export const getNotes = async (req, res, next) => {
+  let notes;
+
   try {
-    const notes = await prisma.note.findMany();
-    const formattedNotes = formatNotes(notes);
-    return res.status(200).json(formattedNotes);
-  } catch (error) {
-    next(httpError('Failed to fetch or format notes', 500));
+    notes = await prisma.note.findMany();
+  } catch (err) {
+    return next(err); 
+  }
+
+  try {
+    const formatted = formatNotes(notes);
+    return res.status(200).json(formatted);
+  } catch (err) {
+    return next(httpError('Failed to format notes', 500, 'FORMAT_FAILED'));
   }
 };
 
-// Create a new note
+// create note
 export const createNote = async (req, res, next) => {
-  const {
-    title,
-    content,
-    authorName = 'Unknown',
-    isPublic = true,
-  } = req.body;
+  const { title, content, authorName = 'Unknown', isPublic = true } = req.body;
 
   try {
-    const createdNote = await prisma.note.create({
+    const created = await prisma.note.create({
       data: {
         title: title.trim(),
         content: content.trim(),
@@ -32,32 +35,30 @@ export const createNote = async (req, res, next) => {
       },
     });
 
-    res.status(201).json(formatNote(createdNote));
-  } catch (error) {
-    next(httpError('Note creation failed', 500));
+    res.status(201).json(formatNote(created));
+  } catch (err) {
+    next(err); 
   }
 };
 
-// Get note by ID
+// get note by id
 export const getNoteById = async (req, res, next) => {
   try {
     const note = await prisma.note.findUnique({
-      where: {
-        id: Number(req.params.id),
-      },
+      where: { id: Number(req.params.id) },
     });
 
     if (!note) {
-      return next(httpError('Note not found', 404));
+      return next(httpError('Note not found', 404, 'NOT_FOUND'));
     }
 
     res.status(200).json(formatNote(note));
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };
 
-// Update note
+// update note by id
 export const updateNote = async (req, res, next) => {
   const noteId = Number(req.params.id);
   const { title, content, authorName, isPublic } = req.body;
@@ -68,38 +69,37 @@ export const updateNote = async (req, res, next) => {
   if (authorName !== undefined) updateData.authorName = authorName;
   if (isPublic !== undefined) updateData.isPublic = isPublic;
 
-  if (Object.keys(updateData).length === 0) {
-    return next(httpError('No fields provided to update', 400));
-  }
-
   try {
-    const existingNote = await prisma.note.findUnique({
-      where: { id: noteId },
-    });
 
-    if (!existingNote) {
-      return next(httpError('Note not found', 404));
+    const existing = await prisma.note.findUnique({ where: { id: noteId } });
+    if (!existing) {
+      return next(httpError('Note not found', 404, 'NOT_FOUND'));
     }
 
-    const updatedNote = await prisma.note.update({
+    const updated = await prisma.note.update({
       where: { id: noteId },
       data: updateData,
     });
 
-    res.status(200).json(formatNote(updatedNote));
-  } catch (error) {
-    next(error);
+    res.status(200).json(formatNote(updated));
+  } catch (err) {
+    next(err);
   }
 };
 
-// Delete a note
+// delete note by id
 export const deleteNote = async (req, res, next) => {
   const noteId = Number(req.params.id);
 
   try {
+    const existing = await prisma.note.findUnique({ where: { id: noteId } });
+    if (!existing) {
+      return next(httpError('Note not found', 404, 'NOT_FOUND'));
+    }
+
     await prisma.note.delete({ where: { id: noteId } });
-    return res.status(204).send(); 
-  } catch (error) {
-    next(error);
+    res.status(204).send(); 
+  } catch (err) {
+    next(err);
   }
 };

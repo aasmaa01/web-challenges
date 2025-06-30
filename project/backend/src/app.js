@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import notesRouter from './routes/notes.js';
 import { errorHandler } from "./utils/errorHandler.js";
+import { prisma } from "./utils/prisma.js";
 
 dotenv.config();
 
@@ -29,6 +30,19 @@ app.use("/api/notes", notesRouter);
 app.use(errorHandler);
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
-});
+
+// ✅ With this block (connect + start server)
+const startServer = async () => {
+  try {
+    await prisma.$connect();
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running at http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error('❌ Failed to connect to the database');
+    console.error(error);
+    process.exit(1); // Stop the process if DB fails
+  }
+};
+
+startServer();
