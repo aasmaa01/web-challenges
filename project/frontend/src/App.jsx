@@ -1,11 +1,13 @@
 import "./App.css";
+import NoteList from './components/notes/NoteList';
 
-function App() {
+const App = () => {
   return (
-    <div className="h-screen flex items-center justify-center">
-      <h1 className="text-5xl font-semibold">Hello World!</h1>
-    </div>
+    <main className="min-h-screen bg-gray-100 p-4">
+      <NoteList />
+    </main>
   );
-}
+};
 
 export default App;
+
