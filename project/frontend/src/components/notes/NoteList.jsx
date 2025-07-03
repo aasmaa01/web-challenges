@@ -35,16 +35,18 @@ const NoteList = () => {
 
         </div>
       </div>
-
-       {filteredNotes.length === 0 ? (
-        <p className="text-center text-gray-500">No notes available.</p>
-      ) : (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredNotes.map((note) => (
-            <NoteItem key={note.id} note={note} />
-          ))}
-        </div>
-      )}
+{notes.length === 0 ? (
+  <p className="text-center text-gray-500">No notes in the system.</p>
+) : filteredNotes.length === 0 ? (
+  <p className="text-center text-gray-500">You have no notes yet.</p>
+) : (
+  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {filteredNotes.map((note) => (
+      <NoteItem key={note.id} note={note} />
+    ))}
+  </div>
+)}
+    
     </div>
   );
 };
