@@ -1,110 +1,110 @@
-// Header.jsx
-import React, { useState } from 'react';
-// Assuming you have an SVG for search icon or similar
-// import { SearchIcon, UserIcon, MenuIcon } from '@heroicons/react/outline'; // Example if using heroicons
+import { useState } from 'react';
 
 const Header = ({ isAuthenticated, user, onSignInClick, onSignUpClick, onSignOutClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Placeholder for user avatar or dropdown
   const UserAvatar = () => (
-    <div className="relative group">
-      <button className="flex items-center justify-center w-9 h-9 rounded-full bg-blue-100 text-blue-800 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-        {user?.initials || 'UN'} {/* Display user initials or default */}
+    <div className="relative hidden md:group">
+      <button className="flex items-center justify-center w-9 h-9 rounded-full bg-cyan-100 text-cyan-800 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400">
+        {user?.initials || 'UN'}
       </button>
-      {/* Dropdown menu (hidden by default, shown on group-hover or click) */}
-      <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-out origin-top-right">
-        <a href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-        <a href="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-        <button onClick={onSignOutClick} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-t border-gray-100">Sign Out</button>
+      <div className="absolute right-0 mt-2 w-48 bg-[#2a2a3a] rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-out origin-top-right">
+        <a href="/profile" className="block px-4 py-2 text-sm text-gray-200 hover:bg-[#3a3a4f]">Profile</a>
+        <a href="/settings" className="block px-4 py-2 text-sm text-gray-200 hover:bg-[#3a3a4f]">Settings</a>
+        <button onClick={onSignOutClick} className="block w-full text-left px-4 py-2 text-sm text-gray-200 hover:bg-[#3a3a4f] border-t border-[#444]">Sign Out</button>
       </div>
     </div>
   );
 
   return (
-    <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto px-4 py-3 sm:py-4 flex justify-between items-center">
-        {/* Logo or Title */}
-        <a href="/" className="flex items-center group"> {/* Added an 'a' tag for clickability */}
-          {/* Optional: Add a simple SVG icon here */}
-          <svg className="h-6 w-6 mr-2 text-blue-600 group-hover:text-blue-700 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <header className="bg-[#1a1a2e] border-b border-[#2c2c3e] shadow-sm sticky top-0 z-50 text-white">
+      <div className="max-w-6xl mx-auto px-2 py-3 sm:px-4 sm:py-4 flex justify-between items-center">
+        {/* Logo / Title */}
+        <a href="/" className="flex items-center group">
+          <svg className="h-5 w-5 sm:h-6 sm:w-6 mr-1 sm:mr-2 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
           </svg>
-          <h1 className="text-2xl font-extrabold text-blue-700 tracking-tight group-hover:text-blue-800 transition-colors duration-200">
+          <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight group-hover:text-cyan-300 transition-colors duration-200">
             CollabNote
           </h1>
         </a>
 
-        {/* Right-aligned actions */}
+        {/* Navigation Actions */}
         <nav className="flex items-center gap-3 sm:gap-4">
-          {/* Optional Search Bar - Visible on larger screens */}
+          {/* Search Input */}
           <div className="relative hidden md:block">
             <input
               type="text"
               placeholder="Search notes..."
-              className="pl-9 pr-3 py-1.5 rounded-full border border-gray-300 focus:ring-2 focus:ring-blue-300 focus:border-blue-500 text-sm w-48 lg:w-64 transition-all duration-200"
+              className="pl-9 pr-3 py-1.5 rounded-full border border-gray-600 bg-[#2a2a3a] text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-500 text-sm w-48 lg:w-64 transition"
             />
-            {/* SVG for search icon */}
-            <svg className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
           </div>
 
-          {/* Conditional rendering for authentication state */}
+          {/* Auth Buttons */}
           {isAuthenticated ? (
-            <UserAvatar />
+            <div className="hidden md:block">
+              <UserAvatar />
+            </div>
           ) : (
             <>
               <button
                 onClick={onSignInClick}
-                className="text-sm font-medium text-gray-600 hover:text-blue-600 transition duration-200 py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
+                className="hidden md:block text-xs sm:text-sm font-medium text-gray-300 hover:text-cyan-400 transition px-2 py-1 sm:px-3 sm:py-1.5"
               >
                 Sign In
               </button>
               <button
                 onClick={onSignUpClick}
-                className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-md transition duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+                className="hidden md:block bg-cyan-600 hover:bg-cyan-700 text-white text-xs sm:text-sm font-medium py-1.5 px-3 sm:py-2 sm:px-4 rounded-md shadow-md hover:shadow-lg transition"
               >
                 Sign Up
               </button>
             </>
           )}
 
-          {/* Mobile Hamburger Menu (hidden on desktop) */}
+          {/* Mobile Menu Icon */}
           <button
-            className="md:hidden text-gray-600 hover:text-blue-600 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
+            className="md:hidden text-gray-300 hover:text-cyan-400 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {/* Hamburger Icon */}
-            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
           </button>
         </nav>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Dropdown Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white py-4 border-t border-gray-200 shadow-md">
+        <div className="md:hidden bg-[#1a1a2e] py-4 border-t border-[#2c2c3e] shadow-md text-white">
           <nav className="flex flex-col items-start px-4 gap-3">
             {isAuthenticated ? (
               <>
-                <a href="/profile" className="block text-gray-700 hover:text-blue-600 w-full py-2">Profile</a>
-                <a href="/settings" className="block text-gray-700 hover:text-blue-600 w-full py-2">Settings</a>
-                <button onClick={onSignOutClick} className="block text-left text-gray-700 hover:text-blue-600 w-full py-2">Sign Out</button>
+                <a href="/profile" className="block text-gray-200 hover:text-cyan-400 w-full py-2">Profile</a>
+                <a href="/settings" className="block text-gray-200 hover:text-cyan-400 w-full py-2">Settings</a>
+                <button onClick={onSignOutClick} className="block text-left text-gray-200 hover:text-cyan-400 w-full py-2">Sign Out</button>
               </>
             ) : (
               <>
-                <button onClick={onSignInClick} className="block text-gray-700 hover:text-blue-600 w-full py-2">Sign In</button>
-                <button onClick={onSignUpClick} className="block bg-blue-600 hover:bg-blue-700 text-white w-full py-2 rounded-md text-left px-3">Sign Up</button>
+                {/* Changed this button's classes to make it a subtle filled button */}
+                <button onClick={onSignInClick} className="block text-gray-200 bg-[#2d2d42] hover:bg-[#3b3b58] w-full py-2 rounded-md text-left px-3 transition">Sign In</button>
+                <button onClick={onSignUpClick} className="block bg-cyan-600 hover:bg-cyan-700 text-white w-full py-2 rounded-md text-left px-3">Sign Up</button>
               </>
             )}
-            {/* Optional: Mobile Search */}
+
+            {/* Optional Search for mobile */}
             <div className="relative w-full mt-2">
               <input
                 type="text"
                 placeholder="Search notes..."
-                className="pl-9 pr-3 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-300 focus:border-blue-500 text-sm w-full"
+                className="pl-9 pr-3 py-2 rounded-md border border-gray-600 bg-[#2a2a3a] text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-500 text-sm w-full"
               />
-              <svg className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              <svg className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
             </div>
           </nav>
         </div>

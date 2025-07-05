@@ -24,7 +24,7 @@ const NoteList = () => {
   const likeClick = (noteId) => setLikedNotes(prev => ({ ...prev, [noteId]: !prev[noteId] }));
 
   return (
-    <div className="relative max-w-6xl mx-auto p-6">
+     <div className="relative max-w-6xl w-full mx-auto py-4 sm:py-6">
 
       {/* selected note view */}
       {selectedNote && (
@@ -46,21 +46,22 @@ const NoteList = () => {
       )}
 
       {/* grid header */}
-      <div className="bg-[#20202f] px-6 py-4 rounded-xl shadow flex flex-wrap justify-between items-center gap-4 text-white mb-8">
-        <h2 className="text-2xl font-bold">
+     <div className="bg-[#20202f] px-4 py-3 sm:px-6 sm:py-4 rounded-xl shadow flex flex-wrap justify-between items-center gap-3 sm:gap-4 text-white mb-8">
+      
+        <h2 className="text-xl sm:text-2xl font-bold">
           {showUserNotes ? 'My Notes' : 'All Notes'}
         </h2>
 
         <div className="flex items-center gap-3 flex-wrap">
           <button
             onClick={toggleFilter}
-            className="bg-[#2d2d42] hover:bg-[#3b3b58] px-4 py-2 text-sm rounded-lg transition"
+            className="bg-[#2d2d42] hover:bg-[#3b3b58] px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm rounded-lg transition"
           >
             Show {showUserNotes ? 'All Notes' : 'My Notes'}
           </button>
 
           {/* total counter */}
-          <span className="bg-[#2f2f46] text-white text-xs px-3 py-1 rounded-full shadow-sm">
+          <span className="bg-[#2f2f46] text-white text-[10px] sm:text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full shadow-sm">
             {filteredNotes.length} Note{filteredNotes.length !== 1 && 's'}
           </span>
         </div>

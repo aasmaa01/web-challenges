@@ -40,7 +40,7 @@ const NoteItem = ({ note, onShowFull, full = false, isLiked = false,  onToggleLi
       {!full && note.content.length > 100 && (
         <button
           onClick={onShowFull}
-          className="text-blue-400 text-xs px-2 py-1 rounded hover:bg-blue-500/10 transition self-start"
+          className="text-blue-400 text-[11px] sm:text-xs px-2 py-1 rounded hover:bg-blue-500/10 transition self-start"
         >
           Read More →
         </button>
