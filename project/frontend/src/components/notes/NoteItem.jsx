@@ -1,4 +1,5 @@
 import { Lock, Users, Heart, MoreVertical } from 'lucide-react';
+import { useState } from 'react';
 
 const NoteItem = ({ note, onShowFull, full = false, isLiked = false,  onToggleLike }) => {
   // note content
@@ -13,14 +14,19 @@ const NoteItem = ({ note, onShowFull, full = false, isLiked = false,  onToggleLi
   const privacyIndicatorColor = note.isPublic ? 'bg-green-600' : 'bg-orange-500';
   const privacyIndicatorLabel = note.isPublic ? 'Public' : 'Private';
   const privacyIndicatorIcon = note.isPublic ? <Users className="w-4 h-4" /> : <Lock  className="w-4 h-4" />;
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
+  const closeMenu = () => setMenuOpen(false);
 
   return (
-    <div className="bg-[#20202f] text-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-5 flex flex-col min-h-[260px]">
+    <div className="bg-[#20202f] text-white rounded-2xl border border-transparent hover:border-blue-500 shadow-lg hover:shadow-[0_4px_24px_rgba(59,130,246,0.4)] hover:bg-[#2a2a3f] hover:scale-[1.015] hover:-translate-y-1 transition-all duration-300 ease-in-out p-5 flex flex-col min-h-[260px]">
       <div className="flex justify-between items-start mb-3">
         <span className={`text-xs font-semibold px-3 py-1 rounded-full inline-flex items-center gap-1 ${privacyIndicatorColor}`}>
           {privacyIndicatorIcon}
           {privacyIndicatorLabel}
         </span>
+
+        
         <button className="text-gray-400 hover:text-white p-1 rounded-full hover:bg-gray-700 transition">
           <MoreVertical size={18} />
         </button>
