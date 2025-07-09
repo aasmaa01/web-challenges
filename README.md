@@ -86,6 +86,7 @@ Our workshops are organized by track and difficulty:
 👉 **[View All Sessions →](./SESSIONS.md)**
 
 Each session includes:
+
 - 📋 **Learning objectives** and prerequisites
 - 🛠️ **Step-by-step tutorials** with code examples
 - 💡 **Best practices** and common pitfalls
@@ -104,6 +105,7 @@ Progressive challenges that build upon each workshop:
 👉 **[View All Challenges →](./CHALLENGES.md)**
 
 Each challenge includes:
+
 - 📋 **Clear requirements** and acceptance criteria
 - 🛠️ **Setup instructions** and starter code
 - 💡 **Hints and tips** for getting unstuck
@@ -162,6 +164,7 @@ Your questions and contributions make this community stronger! 🌟
 ## 🏷️ Organization System
 
 **Session Labels:**
+
 - 🎨 `frontend` / ⚡ `backend` → Track identification
 
 ---
