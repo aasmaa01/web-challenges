@@ -16,24 +16,24 @@
 
 - 🎯 **Topics:** Lifecycle methods, useState, useEffect, custom hooks, ...etc.
 - 📖 **[README](./frontend/sessions/02-react-hooks/README.md)**
-- 🎥 **[Record](https://drive.google.com/file/d/1IjhJxgiSifP-3JmmnMzRBsuJ7CrD7_GB/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/frontend/sessions/02-react-hooks/examples)**
+- 🎥 **[Record](https://drive.google.com/file/d/1IjhJxgiSifP-3JmmnMzRBsuJ7CrD7_GB/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/frontend/sessions/02-react-hooks/code)**
 
 ### Discovery Week
 
 #### Session 01: Svelte.js
 
 - 📖 **[README](./discovery/frontend/svelte/README.md)**
-- 🎥 **[Record](https://drive.google.com/file/d/1Lj45WJt-s8Yda0DUgSdILjYOuLuQcAGT/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/frontend/svelte/code-examples)**
+- 🎥 **[Record](https://drive.google.com/file/d/1Lj45WJt-s8Yda0DUgSdILjYOuLuQcAGT/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/frontend/svelte/code)**
 
 #### Session 02: Vue.js
 
 - 📖 **[README](./discovery/frontend/vue/README.md)**
-- 🎥 **[Record](https://drive.google.com/file/d/184RTBzMYFdi-Bvp8hcIH-u2_x8OhNaO_/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/frontend/vue/code-examples)**
+- 🎥 **[Record](https://drive.google.com/file/d/184RTBzMYFdi-Bvp8hcIH-u2_x8OhNaO_/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/frontend/vue/code)**
 
 #### Session 03: Qwik.js
 
 - 📖 **[README](./discovery/frontend/qwik/README.md)**
-- 🎥 **[Record]()** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/frontend/qwik/code-examples)**
+- 🎥 **[Record]()** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/frontend/qwik/code)**
 
 ## ⚡ Backend Development Track
 
@@ -49,24 +49,24 @@
 
 - 🎯 **Topics:** ORM vs ODM, Mongoose, Prisma
 - 📖 **[README](./backend/sessions/02-orms-and-odms/README.md)**
-- 🎥 **[Record](https://drive.google.com/file/d/1YVY3PxgXvpLacEGupo1fQ3IAdqyAUsHB/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/backend/sessions/02-orms-and-odms/examples)**
+- 🎥 **[Record](https://drive.google.com/file/d/1YVY3PxgXvpLacEGupo1fQ3IAdqyAUsHB/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/backend/sessions/02-orms-and-odms/code)**
 
 ### Discovery Week
 
 #### Session 01: Laravel
 
 - 📖 **[README](/discovery/backend/laravel/README.md)**
-- 🎥 **[Record](https://drive.google.com/file/d/1t0L2PjFa3x_3RWxBavLgPon2MdqAhukq/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/backend/laravel/code-examples)**
+- 🎥 **[Record](https://drive.google.com/file/d/1t0L2PjFa3x_3RWxBavLgPon2MdqAhukq/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/backend/laravel/code)**
 
 #### Session 02: GoLang
 
 - 📖 **[README](/discovery/backend/go/README.md)**
-- 🎥 **[Record](https://drive.google.com/file/d/12rip3l1ADWB26HdQEyl0BoY4ipflJWjW/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/backend/go/code-examples)**
+- 🎥 **[Record](https://drive.google.com/file/d/12rip3l1ADWB26HdQEyl0BoY4ipflJWjW/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/backend/go/code)**
 
 #### Session 03: FastAPI
 
 - 📖 **[README](/discovery/backend/fastapi/README.md)**
-- 🎥 **[Record]()** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/backend/fastapi/code-examples)**
+- 🎥 **[Record]()** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/backend/fastapi/code)**
 
 ## 📋 Quick Start
 
