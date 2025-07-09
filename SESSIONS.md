@@ -33,7 +33,7 @@
 #### Session 03: Qwik.js
 
 - 📖 **[README](./discovery/frontend/qwik/README.md)**
-- 🎥 **[Record]()** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/frontend/qwik/code)**
+- 🎥 **[Record](https://drive.google.com/file/d/1jIFr3iEBrlwRsSmyuIWxG2TozAwMjvXp/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/frontend/qwik/code)**
 
 ## ⚡ Backend Development Track
 
