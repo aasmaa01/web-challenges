@@ -4,31 +4,69 @@
 
 ## 🎨 Frontend Development Track
 
-### Session 01: Introduction to React.js
+### Regular Sessions
+
+#### Session 01: Introduction to React.js
 
 - 🎯 **Topics:** JSX, props, state, event, ...etc.
 - 📖 **[README](./frontend/sessions/01-intro-to-react/README.md)**
-- 🎥 **[Record](https://drive.google.com/file/d/1wmMbLbA8Qs3YFzBZ-K91iMddj4HGN7h9/view?usp=drive_link)** | 🔗 **[Code Repo](https://github.com/aasmaa01/react-workshop)**
+- 🎥 **[Record](https://drive.google.com/file/d/1wmMbLbA8Qs3YFzBZ-K91iMddj4HGN7h9/view?usp=drive_link)** | 🔗 **[Code](https://github.com/aasmaa01/react-workshop)**
 
-### Session 02: React Hooks
+#### Session 02: React Hooks
 
 - 🎯 **Topics:** Lifecycle methods, useState, useEffect, custom hooks, ...etc.
 - 📖 **[README](./frontend/sessions/02-react-hooks/README.md)**
-- 🎥 **[Record](https://drive.google.com/file/d/1IjhJxgiSifP-3JmmnMzRBsuJ7CrD7_GB/view?usp=drive_link)** | 🔗 **[Code Repo](https://github.com/Adel2411/web-journey/tree/main/frontend/sessions/02-react-hooks/examples)**
+- 🎥 **[Record](https://drive.google.com/file/d/1IjhJxgiSifP-3JmmnMzRBsuJ7CrD7_GB/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/frontend/sessions/02-react-hooks/examples)**
+
+### Discovery Week
+
+#### Session 01: Svelte.js
+
+- 📖 **[README](./discovery/frontend/svelte/README.md)**
+- 🎥 **[Record](https://drive.google.com/file/d/1Lj45WJt-s8Yda0DUgSdILjYOuLuQcAGT/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/frontend/svelte/code-examples)**
+
+#### Session 02: Vue.js
+
+- 📖 **[README](./discovery/frontend/vue/README.md)**
+- 🎥 **[Record](https://drive.google.com/file/d/184RTBzMYFdi-Bvp8hcIH-u2_x8OhNaO_/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/frontend/vue/code-examples)**
+
+#### Session 03: Qwik.js
+
+- 📖 **[README](./discovery/frontend/qwik/README.md)**
+- 🎥 **[Record]()** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/frontend/qwik/code-examples)**
 
 ## ⚡ Backend Development Track
 
-### Session 01: Introduction to Express.js
+### Regular Sessions
+
+#### Session 01: Introduction to Express.js
 
 - 🎯 **Topics:** REST API, Routes, Middlewares
 - 📖 **[README](./backend/sessions/01-intro-to-express/README.md)**
-- 🎥 **[Record](https://drive.google.com/file/d/1NEGDAn89QSvQePYoQxzwO4rNXw6IFE11/view?usp=drive_link)** | 🔗 **[Code Repo](https://github.com/ademmenh/express-workshop)**
+- 🎥 **[Record](https://drive.google.com/file/d/1NEGDAn89QSvQePYoQxzwO4rNXw6IFE11/view?usp=drive_link)** | 🔗 **[Code](https://github.com/ademmenh/express-workshop)**
 
-### Session 02: ORMs & ODMs
+#### Session 02: ORMs & ODMs
 
 - 🎯 **Topics:** ORM vs ODM, Mongoose, Prisma
 - 📖 **[README](./backend/sessions/02-orms-and-odms/README.md)**
-- 🎥 **[Record](https://drive.google.com/file/d/1YVY3PxgXvpLacEGupo1fQ3IAdqyAUsHB/view?usp=drive_link)** | 🔗 **[Code Repo](https://github.com/Adel2411/web-journey/tree/main/backend/sessions/02-orms-and-odms/examples)**
+- 🎥 **[Record](https://drive.google.com/file/d/1YVY3PxgXvpLacEGupo1fQ3IAdqyAUsHB/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/backend/sessions/02-orms-and-odms/examples)**
+
+### Discovery Week
+
+#### Session 01: Laravel
+
+- 📖 **[README](/discovery/backend/laravel/README.md)**
+- 🎥 **[Record](https://drive.google.com/file/d/1t0L2PjFa3x_3RWxBavLgPon2MdqAhukq/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/backend/laravel/code-examples)**
+
+#### Session 02: GoLang
+
+- 📖 **[README](/discovery/backend/go/README.md)**
+- 🎥 **[Record](https://drive.google.com/file/d/12rip3l1ADWB26HdQEyl0BoY4ipflJWjW/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/backend/go/code-examples)**
+
+#### Session 03: FastAPI
+
+- 📖 **[README](/discovery/backend/fastapi/README.md)**
+- 🎥 **[Record]()** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/backend/fastapi/code-examples)**
 
 ## 📋 Quick Start
 

@@ -1,48 +1,32 @@
-
-
-
-
 # 🚀 SvelteJS – Let’s Dive In
 
 - With your host: **Ramy Hadid**
-- A full-stack developer 
-- (Svelte & GO / Node & NextJS) 
+- A full-stack developer
+- (Svelte & GO / Node & NextJS)
 
-----------
+---
 
 ## 🌱 What _is_ SvelteJS?
 
--   It’s a JavaScript framework — but not like the others.
-    
--   No virtual DOM (yep, it skips that drama).
-    
--   Super reactive by design.
-    
--   You write less code, and it does more for you.
-    
--   It compiles your code before it even hits the browser.
-    
--   Easy to pick up — even if you're not a JS pro.
-    
+- It’s a JavaScript framework — but not like the others.
+- No virtual DOM (yep, it skips that drama).
+- Super reactive by design.
+- You write less code, and it does more for you.
+- It compiles your code before it even hits the browser.
+- Easy to pick up — even if you're not a JS pro.
 
-----------
+---
 
 ## ✨ Why You Might Like It
 
--   Variables update the UI _instantly_ — just by changing them.
-    
--   Animations? Built-in.
-    
--   Styling? Scoped and tidy.
-    
--   No crazy setup or boilerplate.
-    
--   Stores help you handle app-wide state.
-    
--   Lightweight and super fast.
-    
+- Variables update the UI _instantly_ — just by changing them.
+- Animations? Built-in.
+- Styling? Scoped and tidy.
+- No crazy setup or boilerplate.
+- Stores help you handle app-wide state.
+- Lightweight and super fast.
 
-----------
+---
 
 ## ⚔️ Svelte vs The Others
 
@@ -57,32 +41,27 @@ graph TD;
 
 ```
 
--   Basically: Svelte cuts out a lot of middle steps.
-    
--   It’s like doing things _directly_, not through layers of magic.
-    
+- Basically: Svelte cuts out a lot of middle steps.
+- It’s like doing things _directly_, not through layers of magic.
 
-----------
+---
 
 ## 🛠️ Getting Started
 
--   Install Node.js if you haven’t already.
-    
--   Clone the template:  
-    `npx sv create my-app`
-    
-	```sh
-	ramy@macintosh:~ cd my-app
-	ramy@macintosh:~ npm install
-	```
-    
--   Start dev server: `npm run dev`
-    
--   Open in browser. Edit stuff. Watch it change live.  
-    💡 Try messing with `+page.svelte` and save — magic.
-    
+- Install Node.js if you haven’t already.
+- Clone the template:  
+  `npx sv create my-app`
 
-----------
+  ```sh
+  ramy@macintosh:~ cd my-app
+  ramy@macintosh:~ npm install
+  ```
+
+- Start dev server: `npm run dev`
+- Open in browser. Edit stuff. Watch it change live.  
+  💡 Try messing with `+page.svelte` and save — magic.
+
+---
 
 ## 📦 A Simple Component
 
@@ -101,49 +80,38 @@ graph TD;
 
 ```
 
--   That’s _literally_ it.
-    
--   Logic. Markup. Style — all in one file.
-    
--   No drama.
-    
+- That’s _literally_ it.
+- Logic. Markup. Style — all in one file.
+- No drama.
 
-----------
+---
 
 ## 🔁 Reactive Declarations
 
 ```js
 let count = 1;
 $: double = count * 2;
-
 ```
 
--   Just slap `$:` before a line and boom — reactivity.
-    
--   You don’t have to call `setState()` or any of that stuff.
-    
--   Clean, right?
-    
+- Just slap `$:` before a line and boom — reactivity.
+- You don’t have to call `setState()` or any of that stuff.
+- Clean, right?
 
-----------
+---
 
 ## 📦 Stores
 
 ```js
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
 
 const score = writable(0);
-
 ```
 
--   Think of stores like shared variables.
-    
--   Everyone can read/write/react to them.
-    
--   Use them when you need global-ish state (like user info, themes, etc.).
-    
+- Think of stores like shared variables.
+- Everyone can read/write/react to them.
+- Use them when you need global-ish state (like user info, themes, etc.).
 
-----------
+---
 
 ## 💃 Built-in Transitions
 
@@ -152,14 +120,11 @@ const score = writable(0);
 
 ```
 
--   Wanna animate something? Just add `transition:whatever`.
-    
--   No installing anything. It’s just... there.
-    
--   Try `fly`, `fade`, `scale`, `slide`.
-    
+- Wanna animate something? Just add `transition:whatever`.
+- No installing anything. It’s just... there.
+- Try `fly`, `fade`, `scale`, `slide`.
 
-----------
+---
 
 ## 🎨 Styling Things
 
@@ -172,38 +137,28 @@ const score = writable(0);
 
 ```
 
--   Every component gets its own styles.
-    
--   No weird global CSS conflicts.
-    
--   Wanna use SCSS or Less? You can!
-    
+- Every component gets its own styles.
+- No weird global CSS conflicts.
+- Wanna use SCSS or Less? You can!
 
-----------
+---
 
 ## 🌍 Svelte World
 
--   **SvelteKit**: Next-level stuff — routing, SSR, full-stack vibes.
-    
--   **Lots of community goodies**: Libraries, tools, Discords.
-    
--   Super welcoming — tons of people sharing cool projects.
-    
+- **SvelteKit**: Next-level stuff — routing, SSR, full-stack vibes.
+- **Lots of community goodies**: Libraries, tools, Discords.
+- Super welcoming — tons of people sharing cool projects.
 
-----------
+---
 
 ## ✅ TL;DR
 
--   Svelte is chill but powerful.
-    
--   You write less, and it does more.
-    
--   Fast, clean, and fun.
-    
--   If React is a microwave, Svelte is just lighting a fire and cooking real food 🔥
-    
+- Svelte is chill but powerful.
+- You write less, and it does more.
+- Fast, clean, and fun.
+- If React is a microwave, Svelte is just lighting a fire and cooking real food 🔥
 
-----------
+---
 
 ## 🎉 Let’s Build Stuff
 
@@ -212,6 +167,7 @@ No pressure, just vibes.
 We’ll learn as we go.
 
 # EXAMPLES ---
+
 ```svelte
 <script>
 	let count = 0;
@@ -221,10 +177,12 @@ We’ll learn as we go.
 	Count: {count}
 </button>
 ```
+
 🔹 on:click binds a click event
 🔹 {count} displays the reactive variable
 
 ✅ 2. Two-Way Binding (Input)
+
 ```svelte
 <script>
 	let name = '';
@@ -233,9 +191,11 @@ We’ll learn as we go.
 <input bind:value={name} placeholder="Type your name" />
 <p>Hello, {name}!</p>
 ```
+
 🔹 bind:value automatically keeps name in sync with input
 
 ✅ 3. If Condition
+
 ```svelte
 <script>
 	let isLoggedIn = false;
@@ -251,9 +211,11 @@ We’ll learn as we go.
 	<p>Please log in.</p>
 {/if}
 ```
+
 🔹 {#if ...}{:else}{/if} is Svelte’s conditional block syntax
 
 ✅ 4. Each Loop
+
 ```svelte
 <script>
 	let items = ['🍎 Apple', '🍌 Banana', '🍇 Grape'];
@@ -265,9 +227,11 @@ We’ll learn as we go.
 	{/each}
 </ul>
 ```
+
 🔹 {#each} is used for looping through arrays
 
 ✅ 5. Reactive Statement
+
 ```svelte
 <script>
 	let a = 2;
