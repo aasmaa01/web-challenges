@@ -1,5 +1,5 @@
 from prisma import Prisma
-from models.user import UserCreate
+from app.models.user import UserCreate
 
 class UserRepository:
     @staticmethod

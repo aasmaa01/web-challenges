@@ -1,6 +1,6 @@
 
 run:
-	uvicorn code.app.main:app --reload --port 8001
+	PYTHONPATH=code uvicorn app.main:app --reload --port 8001
 
 install:
 	pip install -r requirements.txt
@@ -15,7 +15,7 @@ format:
 prisma-init:
 	cd code/app && prisma init
 
-prisma-generate:
+generate:
 	cd code/app && prisma generate
 
 prisma-push:

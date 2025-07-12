@@ -1,9 +1,11 @@
 from fastapi import APIRouter, HTTPException
-from models.user import UserCreate, UserOut
-from repository.user import UserRepository
-from main import db
-
+from app.models.user import UserCreate, UserOut
+from app.repository.user import UserRepository
+from prisma import Prisma
+db = Prisma()
+#good thing in prisma t9dr tinitilizha f ay file u dont have to deal with state w hdok 3fyss
 router = APIRouter()
+
 
 @router.post("/", response_model=UserOut)
 async def create_user(user: UserCreate):
