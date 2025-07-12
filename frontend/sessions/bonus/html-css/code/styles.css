@@ -15,18 +15,28 @@
 
 /* 1. CSS VARIABLES & RESET */
 :root {
-    /* Color Palette */
-    --primary-color: #3498db;
-    --secondary-color: #2c3e50;
-    --accent-color: #e74c3c;
-    --success-color: #27ae60;
-    --warning-color: #f39c12;
-    --light-color: #ecf0f1;
-    --dark-color: #34495e;
-    --white: #ffffff;
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    /* Simplified High-Contrast Color Palette */
+    --primary-color: #2563eb;
+    --primary-dark: #1e40af;
+    --secondary-color: #1e293b;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-light: #64748b;
+    --background-primary: #ffffff;
+    --background-secondary: #f8fafc;
+    --background-accent: #f1f5f9;
+    --border-color: #e2e8f0;
+    --success-color: #059669;
+    --accent-color: #dc2626;
+    
+    /* Neutral grays for better consistency */
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-500: #64748b;
+    --gray-700: #334155;
+    --gray-900: #0f172a;
     
     /* Typography */
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -53,8 +63,8 @@
     --max-width: 1200px;
     --border-radius: 8px;
     --border-radius-lg: 12px;
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --box-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --box-shadow-lg: 0 4px 6px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
 }
 
@@ -69,8 +79,8 @@ body {
     font-family: var(--font-family);
     font-size: var(--font-size-base);
     line-height: var(--line-height-base);
-    color: var(--dark-color);
-    background: var(--light-color);
+    color: var(--text-primary);
+    background: var(--background-primary);
 }
 
 /* 2. TYPOGRAPHY */
@@ -78,7 +88,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     line-height: var(--line-height-tight);
     margin-bottom: var(--spacing-sm);
-    color: var(--secondary-color);
+    color: var(--text-primary);
 }
 
 h1 { font-size: var(--font-size-4xl); font-weight: 700; }
@@ -88,12 +98,12 @@ h4 { font-size: var(--font-size-xl); }
 
 p {
     margin-bottom: var(--spacing-md);
-    color: var(--dark-color);
+    color: var(--text-secondary);
 }
 
 strong {
     font-weight: 600;
-    color: var(--secondary-color);
+    color: var(--text-primary);
 }
 
 em {
@@ -102,26 +112,28 @@ em {
 }
 
 code {
-    background: #f8f9fa;
+    background: var(--gray-100);
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: 4px;
     font-family: 'Fira Code', Monaco, 'Courier New', monospace;
     font-size: 0.9em;
-    color: var(--accent-color);
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
 }
 
 blockquote {
     border-left: 4px solid var(--primary-color);
     padding: var(--spacing-md);
     margin: var(--spacing-lg) 0;
-    background: rgba(52, 152, 219, 0.05);
+    background: var(--gray-50);
     font-style: italic;
     border-radius: var(--border-radius);
+    color: var(--text-secondary);
 }
 
 cite {
     font-size: var(--font-size-sm);
-    color: var(--dark-color);
+    color: var(--text-light);
     display: block;
     margin-top: var(--spacing-sm);
 }
@@ -137,6 +149,7 @@ cite {
     text-align: center;
     margin-bottom: var(--spacing-2xl);
     position: relative;
+    color: var(--text-primary);
 }
 
 .section-title::after {
@@ -144,14 +157,15 @@ cite {
     display: block;
     width: 60px;
     height: 3px;
-    background: var(--gradient-primary);
+    background: var(--primary-color);
     margin: var(--spacing-md) auto 0;
     border-radius: 2px;
 }
 
 /* 4. HEADER & NAVIGATION */
 .header {
-    background: var(--white);
+    background: var(--background-primary);
+    border-bottom: 1px solid var(--border-color);
     box-shadow: var(--box-shadow);
     position: sticky;
     top: 0;
@@ -167,10 +181,7 @@ cite {
 
 .logo h1 {
     font-size: var(--font-size-xl);
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
     margin: 0;
 }
 
@@ -182,21 +193,25 @@ cite {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--secondary-color);
+    color: var(--text-secondary);
     font-weight: 500;
     transition: var(--transition);
     position: relative;
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
 }
 
 .nav-links a:hover {
     color: var(--primary-color);
+    background: var(--gray-50);
 }
 
 .nav-links a::after {
     content: '';
     position: absolute;
-    bottom: -4px;
-    left: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 0;
     height: 2px;
     background: var(--primary-color);
@@ -204,27 +219,16 @@ cite {
 }
 
 .nav-links a:hover::after {
-    width: 100%;
+    width: 80%;
 }
 
 /* 5. HERO SECTION */
 .hero {
-    background: var(--gradient-hero);
-    color: var(--white);
+    background: var(--primary-color);
+    color: var(--background-primary);
     padding: var(--spacing-3xl) 0;
     text-align: center;
     position: relative;
-    overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.1);
 }
 
 .hero-content {
@@ -233,47 +237,49 @@ cite {
 }
 
 .hero-title {
-    font-size: var(--font-size-4xl);
+    color: var(--background-primary);
     margin-bottom: var(--spacing-md);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .hero-subtitle {
     font-size: var(--font-size-xl);
     margin-bottom: var(--spacing-lg);
-    opacity: 0.9;
+    color: var(--background-primary);
+    opacity: 0.95;
 }
 
 .hero-description {
     font-size: var(--font-size-lg);
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto var(--spacing-xl);
-    opacity: 0.8;
+    color: var(--background-primary);
+    opacity: 0.9;
 }
 
 .cta-button {
     display: inline-block;
-    background: var(--white);
+    background: var(--background-primary);
     color: var(--primary-color);
     padding: var(--spacing-md) var(--spacing-xl);
     text-decoration: none;
-    border-radius: var(--border-radius-lg);
+    border-radius: var(--border-radius);
     font-weight: 600;
     font-size: var(--font-size-lg);
     transition: var(--transition);
-    box-shadow: var(--box-shadow-lg);
+    box-shadow: var(--box-shadow);
 }
 
 .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    background: var(--light-color);
+    transform: translateY(-1px);
+    box-shadow: var(--box-shadow-lg);
+    background: var(--gray-50);
 }
 
 /* 6. ABOUT SECTION */
 .about {
     padding: var(--spacing-3xl) 0;
-    background: var(--white);
+    background: var(--background-primary);
 }
 
 .about-content {
@@ -290,12 +296,13 @@ cite {
 }
 
 .achievement-list li {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: var(--gray-50);
     margin: var(--spacing-sm) 0;
     padding: var(--spacing-md);
     border-radius: var(--border-radius);
     border-left: 4px solid var(--success-color);
     transition: var(--transition);
+    color: var(--text-secondary);
 }
 
 .achievement-list li:hover {
@@ -312,9 +319,10 @@ cite {
     margin: var(--spacing-md) 0;
     padding: var(--spacing-md);
     padding-left: var(--spacing-2xl);
-    background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+    background: var(--gray-50);
     border-radius: var(--border-radius);
     position: relative;
+    color: var(--text-secondary);
 }
 
 .steps-list li::before {
@@ -323,8 +331,8 @@ cite {
     left: var(--spacing-md);
     top: 50%;
     transform: translateY(-50%);
-    background: var(--accent-color);
-    color: var(--white);
+    background: var(--primary-color);
+    color: var(--background-primary);
     width: 24px;
     height: 24px;
     border-radius: 50%;
@@ -336,10 +344,15 @@ cite {
 }
 
 .learning-resources {
-    background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+    background: var(--gray-100);
     padding: var(--spacing-xl);
     border-radius: var(--border-radius-lg);
     margin-top: var(--spacing-xl);
+    border: 1px solid var(--border-color);
+}
+
+.learning-resources h3 {
+    color: var(--text-primary);
 }
 
 .learning-resources ul {
@@ -351,7 +364,7 @@ cite {
 }
 
 .learning-resources a {
-    color: var(--success-color);
+    color: var(--primary-color);
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition);
@@ -359,13 +372,13 @@ cite {
 
 .learning-resources a:hover {
     text-decoration: underline;
-    color: #2e7d32;
+    color: var(--primary-dark);
 }
 
 /* 7. SKILLS SECTION */
 .skills {
     padding: var(--spacing-3xl) 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: var(--background-secondary);
 }
 
 .skills-grid {
@@ -378,7 +391,7 @@ cite {
 .skill-card {
     flex: 1;
     min-width: 280px;
-    background: var(--white);
+    background: var(--background-primary);
     padding: var(--spacing-xl);
     border-radius: var(--border-radius-lg);
     text-align: center;
@@ -386,6 +399,7 @@ cite {
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    border: 1px solid var(--border-color);
 }
 
 .skill-card::before {
@@ -395,22 +409,23 @@ cite {
     left: 0;
     right: 0;
     height: 4px;
-    background: var(--gradient-primary);
+    background: var(--primary-color);
 }
 
 .skill-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
     box-shadow: var(--box-shadow-lg);
 }
 
 .featured-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: var(--white);
+    background: var(--primary-color);
+    color: var(--background-primary);
+    border-color: var(--primary-dark);
 }
 
 .featured-card h3,
 .featured-card p {
-    color: var(--white);
+    color: var(--background-primary);
 }
 
 .skill-icon {
@@ -419,7 +434,7 @@ cite {
 }
 
 .skill-progress {
-    background: #e9ecef;
+    background: var(--gray-200);
     height: 8px;
     border-radius: 4px;
     margin-top: var(--spacing-md);
@@ -428,10 +443,10 @@ cite {
 
 .progress-bar {
     height: 100%;
-    background: var(--gradient-primary);
+    background: var(--primary-color);
     border-radius: 4px;
     text-align: center;
-    color: var(--white);
+    color: var(--background-primary);
     font-size: var(--font-size-sm);
     font-weight: 600;
     line-height: 8px;
@@ -443,14 +458,14 @@ cite {
 }
 
 .featured-card .progress-bar {
-    background: var(--white);
+    background: var(--background-primary);
     color: var(--primary-color);
 }
 
 /* 8. GALLERY SECTION */
 .gallery {
     padding: var(--spacing-3xl) 0;
-    background: var(--white);
+    background: var(--background-primary);
 }
 
 .gallery-grid {
@@ -463,15 +478,16 @@ cite {
 .gallery-item {
     flex: 1;
     min-width: 280px;
-    background: var(--white);
+    background: var(--background-primary);
     border-radius: var(--border-radius-lg);
     overflow: hidden;
     box-shadow: var(--box-shadow);
     transition: var(--transition);
+    border: 1px solid var(--border-color);
 }
 
 .gallery-item:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     box-shadow: var(--box-shadow-lg);
 }
 
@@ -483,7 +499,7 @@ cite {
 }
 
 .gallery-item:hover img {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 .gallery-item h4,
@@ -493,22 +509,22 @@ cite {
 
 .gallery-item h4 {
     margin: var(--spacing-md) 0 var(--spacing-sm);
+    color: var(--text-primary);
 }
 
 .gallery-item p {
     margin-bottom: var(--spacing-md);
-    color: #666;
+    color: var(--text-secondary);
 }
 
 /* 9. CONTACT SECTION */
 .contact {
     padding: var(--spacing-3xl) 0;
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    color: var(--white);
+    background: var(--background-secondary);
 }
 
 .contact .section-title {
-    color: var(--white);
+    color: var(--text-primary);
 }
 
 .contact-content {
@@ -524,8 +540,12 @@ cite {
 }
 
 .contact-info h3 {
-    color: var(--white);
+    color: var(--text-primary);
     margin-bottom: var(--spacing-md);
+}
+
+.contact-info p {
+    color: var(--text-secondary);
 }
 
 .contact-methods {
@@ -544,26 +564,28 @@ cite {
 }
 
 .contact-method a {
-    color: var(--white);
+    color: var(--primary-color);
     text-decoration: none;
     transition: var(--transition);
 }
 
 .contact-method a:hover {
     text-decoration: underline;
+    color: var(--primary-dark);
 }
 
 .contact-form {
     flex: 1;
     min-width: 400px;
-    background: var(--white);
+    background: var(--background-primary);
     padding: var(--spacing-xl);
     border-radius: var(--border-radius-lg);
-    box-shadow: var(--box-shadow-lg);
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--border-color);
 }
 
 fieldset {
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--border-color);
     border-radius: var(--border-radius);
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
@@ -571,7 +593,7 @@ fieldset {
 
 legend {
     font-weight: 600;
-    color: var(--secondary-color);
+    color: var(--text-primary);
     padding: 0 var(--spacing-sm);
 }
 
@@ -583,25 +605,25 @@ legend {
     display: block;
     margin-bottom: var(--spacing-sm);
     font-weight: 500;
-    color: var(--secondary-color);
+    color: var(--text-primary);
 }
 
 .form-input {
     width: 100%;
     padding: var(--spacing-md);
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--border-color);
     border-radius: var(--border-radius);
     font-size: var(--font-size-base);
     font-family: inherit;
     transition: var(--transition);
-    background: #fafafa;
+    background: var(--background-primary);
+    color: var(--text-primary);
 }
 
 .form-input:focus {
     outline: none;
     border-color: var(--primary-color);
-    background: var(--white);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .radio-group, .checkbox-group {
@@ -619,6 +641,10 @@ legend {
     margin-right: var(--spacing-sm);
 }
 
+.radio-options label {
+    color: var(--text-secondary);
+}
+
 .checkbox-group {
     display: flex;
     align-items: center;
@@ -629,9 +655,13 @@ legend {
     width: auto;
 }
 
+.checkbox-group label {
+    color: var(--text-secondary);
+}
+
 .form-button {
-    background: var(--gradient-primary);
-    color: var(--white);
+    background: var(--primary-color);
+    color: var(--background-primary);
     border: none;
     padding: var(--spacing-md) var(--spacing-xl);
     border-radius: var(--border-radius);
@@ -643,14 +673,15 @@ legend {
 }
 
 .form-button:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--box-shadow-lg);
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--box-shadow);
 }
 
 /* 10. FOOTER */
 .footer {
     background: var(--secondary-color);
-    color: var(--white);
+    color: var(--background-primary);
     padding: var(--spacing-2xl) 0 var(--spacing-md);
 }
 
@@ -668,7 +699,7 @@ legend {
 
 .footer-section h3,
 .footer-section h4 {
-    color: var(--white);
+    color: var(--background-primary);
     margin-bottom: var(--spacing-md);
 }
 
@@ -678,29 +709,30 @@ legend {
 
 .footer-section li {
     margin: var(--spacing-sm) 0;
+    color: var(--gray-300);
 }
 
 .footer-section a {
-    color: var(--light-color);
+    color: var(--gray-300);
     text-decoration: none;
     transition: var(--transition);
 }
 
 .footer-section a:hover {
-    color: var(--white);
+    color: var(--background-primary);
     text-decoration: underline;
 }
 
 .footer-section span {
-    color: var(--primary-color);
+    color: var(--background-primary);
     font-weight: 600;
 }
 
 .footer-bottom {
-    border-top: 1px solid #4a5568;
+    border-top: 1px solid var(--gray-700);
     padding-top: var(--spacing-md);
     text-align: center;
-    color: var(--light-color);
+    color: var(--gray-300);
 }
 
 .footer-bottom p {
@@ -708,7 +740,7 @@ legend {
 }
 
 .footer-bottom strong {
-    color: var(--white);
+    color: var(--background-primary);
 }
 
 /* 11. RESPONSIVE DESIGN */
