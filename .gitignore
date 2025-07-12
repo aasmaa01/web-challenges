@@ -76,7 +76,6 @@
 **/temp/
 
 # Editor directories and files
-**/.vscode/
 **/.idea/
 **/*.swp
 **/*.swo
@@ -97,3 +96,8 @@
 
 # Optional stylelint cache
 **/.stylelintcache
+
+
+# Python virtual environments
+**/venv/
+**/__pycache__/
