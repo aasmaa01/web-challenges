@@ -1,9 +1,9 @@
 {
-  "python.defaultInterpreterPath": "${workspaceFolder}/backend/env/bin/python",
+  "python.defaultInterpreterPath": "${workspaceFolder}/discovery/backend/fastapi/venv/bin/python",
   "python.analysis.typeCheckingMode": "strict",
 
   "python.analysis.extraPaths": [
-    "./backend/src"
+    "./backend/src"//to fix i forget how to set this path 
   ],
 
   "[python]": {
@@ -16,7 +16,7 @@
   },
 
   "ruff.path": [
-    "${workspaceFolder}/backend/env/bin/ruff"
+    "${workspaceFolder}/discovery/backend/fastapi/bin/ruff"
   ],
   "postman.settings.dotenv-detection-notification-visibility": false
 }
