@@ -47,5 +47,13 @@ async def log_time(request, call_next):
     duration = time.time() - start
     print(f" {request.method} {request.url.path} took {duration:.2f}s")
     return response
-
+@app.get("/health")
+async def health():
+    try:
+        await db.user.find_many(take=1)
+        return {"status": "ok"}
+    except Exception as e:
+        return {"status": "error", "details": str(e)}
+    
+    
 app.include_router(user_router, prefix="/users", tags=["Users"])
