@@ -1,0 +1,22 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/backend/env/bin/python",
+  "python.analysis.typeCheckingMode": "strict",
+
+  "python.analysis.extraPaths": [
+    "./backend/src"
+  ],
+
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "never",
+      "source.fixAll": "always"
+    }
+  },
+
+  "ruff.path": [
+    "${workspaceFolder}/backend/env/bin/ruff"
+  ],
+  "postman.settings.dotenv-detection-notification-visibility": false
+}

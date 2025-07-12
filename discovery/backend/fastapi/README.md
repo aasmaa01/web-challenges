@@ -22,7 +22,8 @@ We'll start simple with a **Hello World app**, level up to a full **CRUD API**, 
 ---
 
 ## ⚙️ Setup
-
+## thing before u setup anything 
+ install ruff from vs code extension  and then copy the .vscode in your folder then change the intepreter path and the ruff path  this will help you a lot in the auto complete
 ### 1. Create a virtual environment
 
 ```bash
