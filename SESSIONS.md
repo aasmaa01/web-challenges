@@ -66,7 +66,7 @@
 #### Session 03: FastAPI
 
 - 📖 **[README](/discovery/backend/fastapi/README.md)**
-- 🎥 **[Record]()** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/backend/fastapi/code)**
+- 🎥 **[Record](https://drive.google.com/file/d/1AJudfA68vIxatlMzoVDPX0x0FV2xdUoJ/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/discovery/backend/fastapi/code)**
 
 ## 📋 Quick Start
 
