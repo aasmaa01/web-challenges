@@ -18,6 +18,12 @@
 - 📖 **[README](./frontend/sessions/02-react-hooks/README.md)**
 - 🎥 **[Record](https://drive.google.com/file/d/1IjhJxgiSifP-3JmmnMzRBsuJ7CrD7_GB/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/frontend/sessions/02-react-hooks/code)**
 
+#### Session 03: API Fetching
+
+- 🎯 **Topics:** Rest API, fetch, axios, React Query, ...etc.
+- 📖 **[README](./frontend/sessions/03-api-fetching/README.md)**
+- 🎥 **[Record](https://drive.google.com/file/d/1PXLjGsrVk4VqJ3WnvDVYZRk8s9LzVGHF/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/frontend/sessions/03-api-fetching/code)**
+
 ### Discovery Week
 
 #### Session 01: Svelte.js
@@ -41,15 +47,21 @@
 
 #### Session 01: Introduction to Express.js
 
-- 🎯 **Topics:** REST API, Routes, Middlewares
+- 🎯 **Topics:** REST API, Routes, Middlewares, ...etc.
 - 📖 **[README](./backend/sessions/01-intro-to-express/README.md)**
 - 🎥 **[Record](https://drive.google.com/file/d/1NEGDAn89QSvQePYoQxzwO4rNXw6IFE11/view?usp=drive_link)** | 🔗 **[Code](https://github.com/ademmenh/express-workshop)**
 
 #### Session 02: ORMs & ODMs
 
-- 🎯 **Topics:** ORM vs ODM, Mongoose, Prisma
+- 🎯 **Topics:** ORM vs ODM, Mongoose, Prisma, ...etc.
 - 📖 **[README](./backend/sessions/02-orms-and-odms/README.md)**
 - 🎥 **[Record](https://drive.google.com/file/d/1YVY3PxgXvpLacEGupo1fQ3IAdqyAUsHB/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/backend/sessions/02-orms-and-odms/code)**
+
+#### Session 03: Auth & JWT
+
+- 🎯 **Topics:** Authentication, Authorization, JWT, cookies, ...etc.
+- 📖 **[README](./backend/sessions/03-jwt-and-auth/README.md)**
+- 🎥 **[Record](https://drive.google.com/file/d/1LDDc3CkOnTjIyBUDdDPLeoXupJw_W-8T/view?usp=drive_link)** | 🔗 **[Code](https://github.com/Adel2411/web-journey/tree/main/backend/sessions/03-jwt-and-auth/code)**
 
 ### Discovery Week
 
