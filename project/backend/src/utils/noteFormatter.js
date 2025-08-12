@@ -1,4 +1,3 @@
-
 // formatting one note
 export const formatNote = (note) => {
   return {
