@@ -14,6 +14,10 @@ Welcome to **Web Journey Challenges**! These progressive or extra challenges hel
 - 🎯 **Topics:** JSX, Props, state, hooks, event, ...ect
 - 📖 **[README](./frontend/challenges/challenge-01.md)**
 
+#### Challenge 02: Authentication & API Integration
+- 🎯 **Topics:** Authentication forms, API integration, JWT tokens, protected routes
+- 📖 **[README](./frontend/challenges/challenge-02.md)**
+
 ### 🏆 Extra Challenges
 
 #### Intro to React
@@ -29,6 +33,10 @@ Welcome to **Web Journey Challenges**! These progressive or extra challenges hel
 #### Challenge 01: Express API & Database Foundation
 - 🎯 **Topics:** Express server, routing, middleware, ORM, Database, ...ect
 - 📖 **[README](./backend/challenges/challenge-01.md)**
+
+#### Challenge 02: JWT Authentication & User Management
+- 🎯 **Topics:** JWT tokens, password hashing, protected routes, user authentication
+- 📖 **[README](./backend/challenges/challenge-02.md)**
 
 ### 🏆 Extra Challenges
 

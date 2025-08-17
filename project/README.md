@@ -43,7 +43,62 @@ web-journey/
     │   └── src/
     ├── backend/           # Express.js API for CollabNote
     │   └── src/
+    ├── docker-compose.yml # Full-stack setup with one command
     └── README.md          # This file
+```
+
+---
+
+## 🚀 Quick Start - Run the Complete Project
+
+### 🐳 **One-Command Setup with Docker**
+
+The easiest way to run CollabNote with all services (PostgreSQL, Backend API, Frontend UI):
+
+```bash
+# Fork the repository to try challenges (if you haven't already)
+cd web-journey/project
+
+# Start the complete application
+docker compose up --build -d
+```
+
+**That's it! 🎉** Your application will be available at:
+
+- **Frontend (React)**: http://localhost:5173
+- **Backend API**: http://localhost:5000
+- **Database**: PostgreSQL running on port 5434
+
+### 📋 What Docker Setup Provides
+
+The `docker-compose.yml` handles:
+
+- ✅ **PostgreSQL Database** - Automatically configured with CollabNote schema
+- ✅ **Backend API** - Express.js server with hot reload for development
+- ✅ **Frontend App** - React application with Vite dev server
+- ✅ **Service Dependencies** - Ensures database is ready before starting API
+- ✅ **Volume Mounting** - Your code changes are reflected immediately
+
+### 🛠️ Alternative Manual Setup
+
+If you prefer to run services individually:
+
+#### Backend Setup:
+```bash
+cd project/backend
+npm install
+cp .env.example .env
+# Update .env with your database credentials
+npx prisma generate
+npx prisma db push
+npm run dev
+```
+
+#### Frontend Setup:
+```bash
+cd project/frontend
+npm install
+npm run dev
 ```
 
 ---
@@ -86,28 +141,37 @@ web-journey/
 
 ### 🛠️ Prerequisites
 - Basic understanding of web development concepts
-- Node.js and npm installed
+- **Docker & Docker Compose** installed (recommended)
+- **OR** Node.js and npm + PostgreSQL (for manual setup)
 - Git and GitHub account
 - Code editor of your choice
 
 ### 📋 Quick Start Guide
 
-1. **📚 Start with Sessions**
+1. **🚀 Run the Project**
+   ```bash
+   cd project
+   docker compose up --build -d
+   ```
+   - Frontend: http://localhost:5173
+   - Backend API: http://localhost:5000
+
+2. **📚 Start with Sessions**
    - Choose your track (Frontend/Backend or both)
    - Begin with Session 01 for your chosen track
    - **[View Available Sessions →](../SESSIONS.md)**
 
-2. **🎯 Complete Challenges**
+3. **🎯 Complete Challenges**
    - After each session, check for new challenges in `../frontend/challenges/` or `../backend/challenges/`
    - Implement CollabNote features in your local project directory (`project/frontend/` or `project/backend/`)
    - **[Browse Current Challenges →](../CHALLENGES.md)**
 
-3. **🤝 Share Your Solutions**
+4. **🤝 Share Your Solutions**
    - Follow the step-by-step contributing guide
    - Submit your implementations via Pull Requests
    - **[Learn How to Contribute →](../CONTRIBUTING.md)**
 
-4. **🔄 Build Progressively**
+5. **🔄 Build Progressively**
    - Each new challenge builds on previous work
    - Your CollabNote app grows more sophisticated over time
    - Learn by doing, not just watching
@@ -181,6 +245,33 @@ By building CollabNote, you'll gain hands-on experience with:
 - **[Coding Challenges](../CHALLENGES.md)** - Apply your knowledge
 - **[Contributing Guide](../CONTRIBUTING.md)** - Submit your solutions
 
+### 🐳 Docker Troubleshooting
+
+**Common Docker Issues:**
+
+- **Port conflicts**: Change ports in `docker-compose.yml` if 5173 or 5000 are in use
+- **Database connection**: Run `docker compose logs postgres` to check database startup
+- **Service not starting**: Run `docker compose logs [service-name]` to see error details
+- **Reset everything**: Run `docker compose down -v` then `docker compose up --build -d`
+
+**Useful Docker Commands:**
+```bash
+# Check running services
+docker compose ps
+
+# View logs
+docker compose logs -f
+
+# Stop all services
+docker compose down
+
+# Rebuild and restart
+docker compose up --build -d
+
+# Remove all data (reset database)
+docker compose down -v
+```
+
 ### 🤝 Community Support
 - 💬 **[Discussions](https://github.com/Adel2411/web-journey/discussions)** - Ask questions and share ideas
 - 🐛 **[Issues](https://github.com/Adel2411/web-journey/issues)** - Report problems or request features
@@ -199,9 +290,10 @@ By building CollabNote, you'll gain hands-on experience with:
 
 Ready to start building CollabNote?
 
-1. **🔥 [Choose Your First Session →](../SESSIONS.md)**
-2. **🎯 [Browse Available Challenges →](../CHALLENGES.md)**  
-3. **📚 [Learn How to Contribute →](../CONTRIBUTING.md)**
+1. **🐳 [Run the Project →](#-quick-start---run-the-complete-project)**
+2. **🔥 [Choose Your First Session →](../SESSIONS.md)**
+3. **🎯 [Browse Available Challenges →](../CHALLENGES.md)**  
+4. **📚 [Learn How to Contribute →](../CONTRIBUTING.md)**
 
 ---
 
@@ -209,7 +301,7 @@ Ready to start building CollabNote?
 
 **🌟 Ready to build something amazing?**
 
-Start with your first session, complete the challenges, and watch CollabNote come to life!
+Start the project with Docker, pick your first session, complete the challenges, and watch CollabNote come to life!
 
 **[📚 Explore Sessions →](../SESSIONS.md)** | **[🎯 View Challenges →](../CHALLENGES.md)** | **[🤝 Start Contributing →](../CONTRIBUTING.md)**
 
