@@ -1,6 +1,7 @@
 import express, { json } from "express";
 import { PrismaClient } from "@prisma/client";
 import {body, validationResult} from 'express-validator'
+import { authenticate } from "../middlewares/auth.js";
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -20,13 +21,14 @@ const validateNote=[
     .isLength({max:1000}).withMessage('Content must not exceed 1000 characters.'),
 
     //middleware -handle validation error 
-
 ]
 
+router.use(authenticate)
 
 router.get('/', async(req, res, next) => {
     try {
         const notes= await prisma.note.findMany({
+            where :{userId:req.user.userId},
             orderBy: {createdAt: "desc"}
         });
             const total = await prisma.note.count();
@@ -37,10 +39,7 @@ router.get('/', async(req, res, next) => {
         }
         return res.status(200).json({total, data: notes});
     }catch (error){
-        /*console.error(error);
-        return res.status(500).json({ error: "Server error while fetching notes" });
-   */
-        next(err);
+        next(error);
     }
 });
 
@@ -49,8 +48,8 @@ router.get('/:id',  async (req, res,next) => {
 
     try{
 
-    const note= await prisma.note.findUnique({
-        where :{id: noteId}
+    const note= await prisma.note.findFirst({
+        where :{id: noteId, userId: req.user.userId }
     });
     if (!note) {
         return res.status(404).json({message: "Note not found!"});
@@ -58,10 +57,7 @@ router.get('/:id',  async (req, res,next) => {
     return res.status(200).json({note})
     }
     catch(error){
-        /*console.error(error);
-        return res.status(500).json({ error: "Server error while fetching notes" });
-   */
-        next(err);
+        next(error);
     }
 })
 
@@ -83,13 +79,12 @@ router.post('/',validateNote, async(req,res,next)=>{
                 content,
                 authorName: authorName?? "Anonymous",
                 isPublic: isPublic?? true,
+                userId: req.user.userId,
             },
         });
         return res.status(201).json(newNote);
-    }catch (err){
-        /*console.error("! POST /api/notes error ", err);
-        return res.status(500).json({error: "could not create not , please try again "});*/
-        next(err);
+    }catch (error){
+        next(error);
     }
 })
 
@@ -98,6 +93,12 @@ router.put('/:id', async(req,res,next)=>{
     const { title , content , authorName, isPublic}=req.body;
 
     try{
+        // check ownership
+        const note = await prisma.note.findFirst({
+        where: { id: noteId, userId: req.user.userId },
+        });
+
+        if (!note) return res.status(404).json({ message: "Note not found!" });
         const noteUpdated= await prisma.note.update({// prisma.note.findUnique
         where :{id: noteId},
         data: {
@@ -106,13 +107,13 @@ router.put('/:id', async(req,res,next)=>{
     });
     return res.status(200).json(noteUpdated)
     }
-    catch (err) {
+    catch (error) {
         /* if (err.code === 'P2025') {  // Prisma: record not found
       return res.status(404).json({ error: "Note not found" });
     }
     return res.status(500).json({ error: "Server error", detail: err.message });
   */
- next(err);
+        next(error);
     }
 })
 
@@ -120,10 +121,17 @@ router.delete('/:id', async(req,res, next)=>{
     const noteId= parseInt(req.params.id)
     
     try{
+        const note = await prisma.note.findFirst({
+          where: { id: noteId, userId: req.user.userId },
+        });
+        if (!note)  {
+            return res.status(404).json({message:"Note not found!"})           
+        }
+
         await prisma.note.delete({where: {id: noteId}});
         return res.status(200).json({message: "Note deleted successfully !"});
-    }catch (err){
-        next(err);
+    }catch (error){
+        next(error);
         /*
         
     if (err.code === 'P2025'){
@@ -134,6 +142,30 @@ router.delete('/:id', async(req,res, next)=>{
   }
 
 })
+// Note Sharing
+router.post("/:id/share", async (req, res, next) => {
+  const noteId = parseInt(req.params.id);
+  const { email, permission } = req.body;
+
+  try {
+    const note = await prisma.note.findFirst({
+      where: { id: noteId, userId: req.user.userId },
+    });
+    if (!note) return res.status(404).json({ message: "Note not found or not owned by you" });
+
+    const userToShare = await prisma.user.findUnique({ where: { email } });
+    if (!userToShare) return res.status(404).json({ message: "User not found" });
+
+    const share = await prisma.noteShare.create({
+      data: { noteId, userId: userToShare.id, permission },
+    });
+
+    res.json({ message: "Note shared", share });
+  } catch (err) {
+    next(err);
+  }
+});
+
 
 
 
