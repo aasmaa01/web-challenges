@@ -14,6 +14,23 @@ datasource db {
   url  = env("DATABASE_URL")
 }
 
+model User {
+  id Int @id @default(autoincrement())
+  email String @unique
+  password String 
+  name String
+  age Int
+  role String @default("user") // user | admin
+  isVerified Boolean @default(false)
+  refreshTokens RefreshToken[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  notes Note[]
+  sharedNotes NoteShare[]
+}
+
 model Note {
   id Int @id @default(autoincrement())
   title String 
@@ -22,5 +39,32 @@ model Note {
   isPublic Boolean @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+
+  shares NoteShare[]
+}
+
+model RefreshToken {
+  id Int @id @default(autoincrement())
+  token String @unique
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model NoteShare{
+  id Int
+  noteId Int
+  userId Int
+  permission String // read/ write
+
+
+  note Note @relation(fields: [noteId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([noteId,userId])
 }
 
