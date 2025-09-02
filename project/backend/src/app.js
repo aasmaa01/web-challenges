@@ -3,6 +3,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import notesRoute from "./routes/notes.js";
 import { errorHandler } from './middlewares/errorHandler.js';
+import { authenticate } from './middlewares/auth.js';
+import authRoute from "./routes/auth.js";
+
 
 dotenv.config();
 
@@ -15,8 +18,16 @@ app.use(cors({
     credentials: true,
 }));
 app.use(express.json());
+
+app.use("/api/auth", authRoute);
+app.use(authenticate)
+
+
 app.use("/api/notes", notesRoute);
 app.use(errorHandler);
+
+//app.use("/api/admin", authenticate, authorize(["admin"]), adminRoutes);
+
 
 app.get('/', (req,res)=>{
     res.send("welcome to notes app ")
